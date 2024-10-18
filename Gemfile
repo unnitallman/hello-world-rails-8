@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-ruby "3.2.4"
+ruby file: ".ruby-version"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.2.1", ">= 7.2.1.1"
