@@ -45,7 +45,10 @@ RUN bundle exec bootsnap precompile app/ lib/
 # Precompiling assets for production without requiring secret RAILS_MASTER_KEY
 RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
 
-
+# Install custom packages
+RUN apt-get update -qq && \
+    apt-get install --no-install-recommends -y wkhtmltopdf ffmpeg && \
+    rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 
 # Final stage for app image
@@ -55,10 +58,6 @@ FROM base
 COPY --from=build "${BUNDLE_PATH}" "${BUNDLE_PATH}"
 COPY --from=build /workspace/repo /workspace/repo
 
-# Install custom packages
-RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y wkhtmltopdf ffmpeg && \
-    rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 # Entrypoint prepares the database.
 ENTRYPOINT ["/workspace/repo/bin/docker-entrypoint"]
