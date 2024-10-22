@@ -56,9 +56,9 @@ COPY --from=build "${BUNDLE_PATH}" "${BUNDLE_PATH}"
 COPY --from=build /workspace/repo /workspace/repo
 
 # Install custom packages
-# RUN apt-get update -qq && \
-#     apt-get install --no-install-recommends -y wkhtmltopdf ffmpeg && \
-#     rm -rf /var/lib/apt/lists /var/cache/apt/archives
+RUN apt-get update -qq && \
+    apt-get install --no-install-recommends -y wkhtmltopdf ffmpeg && \
+    rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 # Entrypoint prepares the database.
 ENTRYPOINT ["/workspace/repo/bin/docker-entrypoint"]
