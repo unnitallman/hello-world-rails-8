@@ -57,7 +57,7 @@ COPY --from=build /workspace/repo /workspace/repo
 
 # Install custom packages
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y wkhtmltopdf && \
+    apt-get install --no-install-recommends -y wkhtmltopdf ffmpeg && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 # # Run and own only the runtime files as a non-root user for security
